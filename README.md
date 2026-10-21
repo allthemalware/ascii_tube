@@ -15,7 +15,7 @@ A zero-install **browser build** of `ascii_cam` — live webcam, video file, or
 screen share to ASCII, with the olive-green theme, historic display palettes,
 several gradient maps, and cool-retro-term-style CRT effects, running entirely
 client-side — lives in its own repository:
-**[ascii-cam](https://github.com/TheWhyteWolf/ascii-cam)**
+**[ascii-cam](https://github.com/allthemalware/ascii-cam)**
 (deployed to GitHub Pages).
 
 ## Colour
@@ -91,7 +91,7 @@ half-block, `--diff`). Frames come straight off the camera via ffmpeg's platform
 capture backend (`v4l2` on Linux, `avfoundation` on macOS, `dshow` on Windows).
 
 > There is also a zero-install **browser build** of ascii_cam with retro palettes
-> and CRT effects — see the [ascii-cam](https://github.com/TheWhyteWolf/ascii-cam) repo.
+> and CRT effects — see the [ascii-cam](https://github.com/allthemalware/ascii-cam) repo.
 
 ```
 ascii_cam.py [options]              # default camera, monochrome
