@@ -9,7 +9,50 @@ ascii_tube.py <URL|file> [options]
 
 Install as a command (`ascii-tube`) with `pip install .` (or `pipx install .`).
 
-## Web app (browser)
+## In the browser
+
+**Live: https://allthemalware.github.io/ascii_tube/**
+
+The same renderer on an emulated CRT terminal: power the tube on and it plays a
+short sample clip; drop in (or press `O` to open) any video of your own.
+
+> **Your footage never leaves your device.** All decoding and rendering happens
+> in the page, on your machine. Nothing is uploaded, copied or sent anywhere:
+> there is no server behind it and no tracking. The only things the page
+> fetches are its own files and the sample clip.
+
+It keeps the terminal tool's behaviour: the character ramps, the four colour
+modes, dithering, picture tuning and the playback keys all work the same, and
+the status bar shows the equivalent `ascii-tube` command for what's on screen.
+
+| key       | action                 | key     | action                          |
+|-----------|------------------------|---------|---------------------------------|
+| `space`   | pause / resume         | `c`     | cycle `--color`                 |
+| `q`/`Esc` | stop                   | `d`     | `--dither`                      |
+| `←` / `→` | seek ∓5 seconds        | `r`     | `--long` ramp                   |
+| `o`       | open a video file      | `i`     | `--invert`                      |
+| `enter`   | play the sample        | `l`     | `--loop`                        |
+| `?`       | help                   | `a`     | `--audio` (muted by default)    |
+| `-` / `=` | smaller / larger text  | `[` `]` | `--brightness` ∓0.05            |
+| `m`       | amber phosphor         | `{` `}` | `--contrast` ∓0.1               |
+| `s`       | scanlines              | `g` `G` | `--gamma` ∓0.1                  |
+| `f`       | fullscreen             |         |                                 |
+
+YouTube links need the terminal version: browsers can't fetch those streams.
+Anything the browser can decode plays (H.264 `.mp4` and `.webm` everywhere).
+
+The browser build is plain static files in `web/`, no build step. Run it
+locally with any static server (ES modules don't load over `file://`):
+
+```
+python3 -m http.server -d web 8000    # then open http://localhost:8000/
+```
+
+Pushes to `main` deploy `web/` to GitHub Pages via
+`.github/workflows/pages.yml`. All paths are relative, so it works unchanged
+behind a custom domain.
+
+## Webcam in the browser (ascii-cam)
 
 A zero-install **browser build** of `ascii_cam` — live webcam, video file, or
 screen share to ASCII, with the olive-green theme, historic display palettes,
@@ -131,3 +174,6 @@ Dependencies: ffmpeg (+ ffprobe), numpy.
 ```
 pytest                 # or: python test_ascii_tube.py
 ```
+
+`test_web_port.py` checks the browser port (`web/js/ascii.js`) against the
+Python helpers on the same inputs; it needs `node` and is skipped without it.
